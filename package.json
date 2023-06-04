@@ -10,7 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "astro": "^2.5.6"
+    "@astrojs/vue": "^2.2.1",
+    "astro": "^2.5.7",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^5.59.8",
