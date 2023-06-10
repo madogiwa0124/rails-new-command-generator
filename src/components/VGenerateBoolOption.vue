@@ -18,7 +18,22 @@ const handleOnInput = (event: Event) => {
 </script>
 <template>
   <div class="v-generate-bool-option">
-    <input type="checkbox" :id="name" :value="true" @change="handleOnInput" />
-    <label :for="name" :title="description">{{ name }}</label>
+    <input type="checkbox" :id="name" class="v-generate-bool-option__input" :value="true" @change="handleOnInput" />
+    <label :for="name" :title="description" class="v-generate-bool-option__label">{{ name }}</label>
   </div>
 </template>
+<style scoped>
+.v-generate-bool-option {
+  display: flex;
+  padding: 0.25rem;
+}
+
+.v-generate-bool-option__input {
+  display: block;
+}
+
+.v-generate-bool-option__label {
+  display: block;
+  padding-left: 0.5rem;
+}
+</style>

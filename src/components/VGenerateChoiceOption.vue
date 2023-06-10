@@ -19,9 +19,26 @@ const handleOnInput = (event: Event) => {
 </script>
 <template>
   <div class="v-generate-choice-option">
-    <select :id="name" @change="handleOnInput">
+    <select :id="name" class="v-generate-choice-option__input" @change="handleOnInput">
       <option v-for="choice in choices" :value="choice">{{ choice }}</option>
     </select>
-    <label :for="name" :title="description">{{ name }}</label>
+    <label class="v-generate-choice-option__label" :for="name" :title="description">{{ name }}</label>
   </div>
 </template>
+<style scoped>
+.v-generate-choice-option {
+  display: flex;
+  padding: 0.125rem;
+}
+
+.v-generate-choice-option__input {
+  display: block;
+  min-width: 150px;
+  padding: 0.25rem;
+}
+
+.v-generate-choice-option__label {
+  display: block;
+  padding-left: 0.5rem;
+}
+</style>
