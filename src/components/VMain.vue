@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import VOption from "./VGenerateOption.vue";
+import VGenerateBoolOption from "./VGenerateBoolOption.vue";
+import VGenerateChoiceOption from "./VGenerateChoiceOption.vue";
 import VCodeBlock from "./VCodeBlock.vue";
 import { textOptions, boolOptions, joinTextOptions, joinBoolOptions } from "../services/rails/Option";
 import { computed, ref } from "vue";
@@ -15,18 +16,18 @@ const booleanOptionsText = computed(() => {
 const stringOptionsText = computed(() => {
   return joinTextOptions(stringOptions.value.filter((option) => option.value));
 });
-const handleOnBoolOptionInput = (arg: { name: string; value: boolean | string }) => {
+const handleOnBoolOptionInput = (arg: { name: string; value: boolean }) => {
   const boolOptioncommands = booleanOptions.value.map((option) => option.commandText);
   if (boolOptioncommands.includes(arg.name)) {
     const option = booleanOptions.value.find((option) => option.commandText === arg.name);
     if (option) option.value ? (option.value = false) : (option.value = true);
   }
 };
-const handleOnTextOptionInput = (arg: { name: string; value: boolean | string }) => {
+const handleOnTextOptionInput = (arg: { name: string; value: string }) => {
   const textOptioncommands = stringOptions.value.map((option) => option.commandText);
   if (textOptioncommands.includes(arg.name)) {
     const option = stringOptions.value.find((option) => option.commandText === arg.name);
-    if (option && typeof arg.value === "string") option.value = arg.value;
+    if (option) option.value = arg.value;
   }
 };
 </script>
@@ -37,22 +38,20 @@ const handleOnTextOptionInput = (arg: { name: string; value: boolean | string })
     <VCodeBlock :code="railsGenarateCommand" />
     <ul>
       <li v-for="option in stringOptions">
-        <VOption
+        <VGenerateChoiceOption
           :name="option.commandText"
           :description="option.description"
           :value="option.value"
           :choices="option.choices"
-          type="choice"
           @input="handleOnTextOptionInput"
         />
       </li>
       <li v-for="option in booleanOptions">
-        <VOption
+        <VGenerateBoolOption
           :name="option.commandText"
           :description="option.description"
           :value="option.value"
           :choices="option.choices"
-          type="boolean"
           @input="handleOnBoolOptionInput"
         />
       </li>

@@ -4,13 +4,12 @@ import { ref } from "vue";
 type Props = {
   name: string;
   description: string;
-  type: "boolean" | "choice";
-  value: string | boolean;
-  choices?: string[];
+  value: string;
+  choices: string[];
 };
 
 const props = defineProps<Props>();
-const emits = defineEmits(["input"]);
+const emits = defineEmits<{ input: [value: { name: string; value: string }] }>();
 const value = ref("");
 const handleOnInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
@@ -19,9 +18,8 @@ const handleOnInput = (event: Event) => {
 };
 </script>
 <template>
-  <div class="v-generate-option">
-    <input v-if="type === 'boolean'" type="checkbox" :id="name" :value="true" @change="handleOnInput" />
-    <select v-if="type === 'choice'" :id="name" @change="handleOnInput">
+  <div class="v-generate-choice-option">
+    <select :id="name" @change="handleOnInput">
       <option v-for="choice in choices" :value="choice">{{ choice }}</option>
     </select>
     <label :for="name" :title="description">{{ name }}</label>
