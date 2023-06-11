@@ -62,7 +62,6 @@ const handleOnTextOptionInput = (arg: { name: string; value: string }) => {
               :name="option.commandText"
               :description="option.description"
               :value="option.value"
-              :choices="option.choices"
               @input="handleOnBoolOptionInput"
             />
           </li>
